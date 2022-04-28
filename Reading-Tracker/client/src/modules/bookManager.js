@@ -34,9 +34,9 @@ export const getAllBooks = () => {
       });
     });
   };
-  export const getBookByUserId = (id) => {
+  export const getBookByUserId = () => {
     return getToken().then((token) => {
-      return fetch(`${_apiUrl}/home?userProfileId=${id}`, {
+      return fetch(`${_apiUrl}/home`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

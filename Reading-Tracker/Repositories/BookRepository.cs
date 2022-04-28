@@ -79,7 +79,7 @@ namespace Reading_Tracker.Repositories
             }
         }
 
-        public List<Book> GetBookByUserId(int userProfileId)
+        public List<Book> GetBookByUserId(int id)
         {
             using (var conn = Connection)
             {
@@ -100,7 +100,7 @@ namespace Reading_Tracker.Repositories
                                  LEFT JOIN Type t ON bt.TypeId = t.Id
                            WHERE ub.UserId = @userId";
 
-                    cmd.Parameters.AddWithValue("@userId", userProfileId);
+                    cmd.Parameters.AddWithValue("@userId", id);
                     var reader = cmd.ExecuteReader();
 
                     var book = new List<Book>();
@@ -213,6 +213,8 @@ namespace Reading_Tracker.Repositories
                     Id = DbUtils.GetInt(reader, "UserBookId"),
                     UserId = DbUtils.GetInt(reader, "BookUserProfileId"),
                     BookId = DbUtils.GetInt(reader, "UserBookBookId"),
+                    Chapter = DbUtils.GetString(reader, "Chapter"),
+                    LineNumber = DbUtils.GetInt(reader, "LineNumber"),
                 },
                 BookType = new BookType()
                 {
