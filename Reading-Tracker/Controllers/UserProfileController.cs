@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using Reading_Tracker.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Reading_Tracker.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Reading_Tracker.Models;
 
-namespace Tabloid.Controllers
+namespace Reading_Tracker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,11 +15,16 @@ namespace Tabloid.Controllers
         {
             _userProfileRepository = userProfileRepository;
         }
-
+        [Authorize]
         [HttpGet("{firebaseUserId}")]
-        public IActionResult GetUserProfile(string firebaseUserId)
+        public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
-            return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
+            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            return Ok(userProfile);
         }
 
         [HttpGet("DoesUserExist/{firebaseUserId}")]
@@ -33,13 +39,12 @@ namespace Tabloid.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
+        public IActionResult Register(UserProfile userProfile)
         {
+
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
-                nameof(GetUserProfile),
-                new { firebaseUserId = userProfile.FirebaseUserId },
-                userProfile);
+                nameof(GetByFirebaseUserId), new { firebaseUserId = userProfile.FirebaseUserId }, userProfile);
         }
     }
 }

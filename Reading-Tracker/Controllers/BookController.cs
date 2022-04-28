@@ -7,6 +7,7 @@ using System.Security.Claims;
 
 namespace Reading_Tracker.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BookController : ControllerBase

@@ -1,13 +1,11 @@
-﻿using Reading_Tracker.Models;
-using System.Collections.Generic;
+﻿
+using Reading_Tracker.Models;
 
 namespace Reading_Tracker.Repositories
 {
     public interface IUserProfileRepository
     {
-        void Add(UserProfile user);
-        List<UserProfile> GetAll();
+        void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
-        UserProfile GetById(int id);
     }
 }
