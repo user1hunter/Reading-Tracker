@@ -37,9 +37,11 @@ namespace Reading_Tracker.Controllers
         }
 
         [HttpGet("home")]
-        public IActionResult GetUserBooks(int userProfileId)
+        public IActionResult GetUserBooks(int id)
         {
-            return Ok(_bookRepository.GetBookByUserId(userProfileId));
+            UserProfile user = GetCurrentUserProfile();
+            id = user.Id;
+            return Ok(_bookRepository.GetBookByUserId(id));
         }
 
         [HttpPost]
@@ -85,6 +87,12 @@ namespace Reading_Tracker.Controllers
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        private string GetCurrentUserProfileId()
+        {
+            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return id;
         }
     }
 }
