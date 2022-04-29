@@ -116,7 +116,7 @@ export const getAllBooks = () => {
       });
     });
   };
-  export const deleteBook = (id) => {
+  export const removeBook = (id) => {
     return getToken().then((token) => {
       return fetch(`${_apiUrl}/${id}`, {
         method: "DELETE",
@@ -127,7 +127,7 @@ export const getAllBooks = () => {
         if (resp.ok) {
           return resp.ok;
         } else {
-          throw new Error("An error occurred deleting Book");
+          throw new Error("An error occurred Removing Book");
         }
       });
     });

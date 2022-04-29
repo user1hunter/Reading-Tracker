@@ -11,8 +11,6 @@ const UserBook = ({userBook}) => {
                 <CardSubtitle>Author: {userBook.author}</CardSubtitle>
                 <CardSubtitle>Chapter: {userBook.userBook.chapter}</CardSubtitle>
                 <CardSubtitle>Line Number: {userBook.userBook.lineNumber}</CardSubtitle>
-                <Button><Link to={`/update/${userBook.id}`}></Link>Update</Button>
-                <Button><Link to={`/remove/${userBook.id}`}></Link>Remove</Button>
             </CardBody>
         </Card>
     )
