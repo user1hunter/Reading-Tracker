@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import UserBookList from "./UserBookList";
 import BookList from "./BookList";
+import BookForm from "./BookForm";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -15,6 +16,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/books" exact>
           {isLoggedIn ? <BookList /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/create" exact>
+          {isLoggedIn ? <BookForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">

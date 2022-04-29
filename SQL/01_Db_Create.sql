@@ -21,28 +21,28 @@ DROP TABLE IF EXISTS UserBook
 DROP TABLE IF EXISTS BookType
 
 CREATE TABLE [UserProfile] (
-  [Id] int PRIMARY KEY,
-  [Name] nvarchar(40) NOT NULL,
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [Name] nvarchar(255) NOT NULL,
   [Email] nvarchar(255) NOT NULL,
-  [FirebaseUserId] nvarchar(255)
+  [FirebaseUserId] nvarchar(255) NOT NULL
 )
 GO
 
 CREATE TABLE [Book] (
-  [Id] int PRIMARY KEY,
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
   [Name] nvarchar(255) NOT NULL,
   [Author] nvarchar(255) NOT NULL
 )
 GO
 
 CREATE TABLE [Type] (
-  [Id] int PRIMARY KEY,
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
   [Name] nvarchar(255) NOT NULL
 )
 GO
 
 CREATE TABLE [UserBook] (
-  [Id] int PRIMARY KEY,
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
   [UserId] int NOT NULL,
   [BookId] int NOT NULL,
   [IsFinished] bit DEFAULT (0),
@@ -52,7 +52,7 @@ CREATE TABLE [UserBook] (
 GO
 
 CREATE TABLE [BookType] (
-  [Id] int PRIMARY KEY,
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
   [BookId] int NOT NULL,
   [TypeId] int NOT NULL
 )
@@ -69,3 +69,4 @@ GO
 
 ALTER TABLE [UserBook] ADD FOREIGN KEY ([BookId]) REFERENCES [Book] ([Id])
 GO
+

@@ -24,6 +24,7 @@ namespace Reading_Tracker
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<ITypeRepository, TypeRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

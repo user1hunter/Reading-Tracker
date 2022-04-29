@@ -9,7 +9,7 @@ const BookList = () => {
   const [books, setBooks] = useState([]);
 
   const getBooks = () => {
-    getAllBooks().then((l) => setBooks(l));
+    getAllBooks().then((b) => setBooks(b));
   };
 
   useEffect(() => {
