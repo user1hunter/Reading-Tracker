@@ -9,7 +9,7 @@ const UserBookList = () => {
   const [userBooks, setUserBooks] = useState([]);
 
   const getUserBooks = () => {
-    getBookByUserId().then((l) => setUserBooks(l));
+    getBookByUserId().then((b) => setUserBooks(b));
   };
 
   useEffect(() => {

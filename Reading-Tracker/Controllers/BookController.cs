@@ -49,6 +49,11 @@ namespace Reading_Tracker.Controllers
         public IActionResult Post(Book book)
         {
             _bookRepository.CreateBook(book);
+            
+            foreach (var type in book.Types)
+            {
+                _bookRepository.CreateBookType(book.Id, type.Id);
+            }
 
             return CreatedAtAction("Get", new { id = book.Id }, book);
         }
@@ -65,17 +70,17 @@ namespace Reading_Tracker.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Book book)
-        {
-            if (id != book.Id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public IActionResult Put(int id, Book book)
+        //{
+        //    if (id != book.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _bookRepository.EditBook(book);
-            return NoContent();
-        }
+        //    _bookRepository.EditBook(book);
+        //    return NoContent();
+        //}
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

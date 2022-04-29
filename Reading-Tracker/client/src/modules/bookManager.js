@@ -50,7 +50,7 @@ export const getAllBooks = () => {
       });
     });
   };
-  export const addBook = (book) => {
+  export const createBook = (book) => {
     return getToken().then((token) => {
       return fetch(_apiUrl, {
         method: "POST",

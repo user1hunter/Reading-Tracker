@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Reading_Tracker.Models;
 using Reading_Tracker.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace Reading_Tracker.Repositories
@@ -126,17 +127,30 @@ namespace Reading_Tracker.Repositories
                 {
                     cmd.CommandText = @"INSERT INTO Book (Name, Author)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@name, @author);
-                                        INSERT INTO BookType (BookId, TypeId)
-                                        VALUES (@bookId, @typeId)
+                                        VALUES (@name, @author)
                                         ";
-
                     DbUtils.AddParameter(cmd, "@name", book.Name);
                     DbUtils.AddParameter(cmd, "@author", book.Author);
-                    DbUtils.AddParameter(cmd, "@bookId", book.BookType.BookId);
-                    DbUtils.AddParameter(cmd, "@typeId", book.BookType.TypeId);
 
                     book.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void CreateBookType(int bookId, int typeId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO BookType (BookId, TypeId)
+                                        VALUES (@bookId, @typeId)
+                                        ";
+                    DbUtils.AddParameter(cmd, "@bookId", bookId);
+                    DbUtils.AddParameter(cmd, "@typeId", typeId);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -179,27 +193,27 @@ namespace Reading_Tracker.Repositories
             }
         }
 
-        public void EditBook(Book book)
-        {
-            using (SqlConnection con = Connection)
-            {
-                con.Open();
-                using (SqlCommand cmd = con.CreateCommand())
-                {
-                    cmd.CommandText += @"UPDATE Book
-                                        SET
-                                            Name = @name,
-                                            Author = @author,
-                                            TypeId = @typeId
-                                        WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@name", book.Name);
-                    cmd.Parameters.AddWithValue("@auhtor", book.Author);
-                    cmd.Parameters.AddWithValue("@typeId", book.BookType.TypeId);
+        //public void EditBook(Book book)
+        //{
+        //    using (SqlConnection con = Connection)
+        //    {
+        //        con.Open();
+        //        using (SqlCommand cmd = con.CreateCommand())
+        //        {
+        //            cmd.CommandText += @"UPDATE Book
+        //                                SET
+        //                                    Name = @name,
+        //                                    Author = @author,
+        //                                    TypeId = @typeId
+        //                                WHERE Id = @id";
+        //            cmd.Parameters.AddWithValue("@name", book.Name);
+        //            cmd.Parameters.AddWithValue("@author", book.Author);
+        //            cmd.Parameters.AddWithValue("@typeId", book.BookType.TypeId);
 
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
 
         private Book NewBookFromReader(SqlDataReader reader)
         {
@@ -216,12 +230,7 @@ namespace Reading_Tracker.Repositories
                     Chapter = DbUtils.GetString(reader, "Chapter"),
                     LineNumber = DbUtils.GetInt(reader, "LineNumber"),
                 },
-                BookType = new BookType()
-                {
-                    Id = DbUtils.GetInt(reader, "BookTypeId"),
-                    BookId = DbUtils.GetInt(reader, "BookTypeBookId"),
-                    TypeId = DbUtils.GetInt(reader, "BookTypeTypeId"),
-                }
+                Types = new List<Models.Type>()
             };
 
             return book;
