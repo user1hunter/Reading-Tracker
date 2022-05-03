@@ -6,6 +6,7 @@ import UserBookList from "./UserBookList";
 import BookList from "./BookList";
 import BookForm from "./BookForm";
 import UserBookRemove from "./UserBookRemove";
+import UserBookUpdate from "./UserBookUpdate";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -25,6 +26,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         <Route path="/remove/:id(\d+)" exact>
           {isLoggedIn ? <UserBookRemove /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/update/:id(\d+)" exact>
+          {isLoggedIn ? <UserBookUpdate /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">

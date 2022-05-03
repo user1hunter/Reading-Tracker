@@ -72,18 +72,18 @@ export const getAllBooks = () => {
       });
     });
   };
-  export const updateBook = (book) => {
+  export const updateBook = (userBook) => {
     return getToken().then((token) => {
-      return fetch(`${_apiUrl}/update/${book.id}`, {
+      return fetch(`${_apiUrl}/update/${userBook.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(book),
+        body: JSON.stringify(userBook),
       }).then((resp) => {
         if (resp.ok) {
-          return resp.json();
+          return [];
         } else if (resp.status === 401) {
           throw new Error("Unauthorized");
         } else {

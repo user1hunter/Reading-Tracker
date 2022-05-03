@@ -58,7 +58,7 @@ namespace Reading_Tracker.Controllers
             return CreatedAtAction("Get", new { id = book.Id }, book);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public IActionResult Put(int id, UserBook userBook)
         {
             if (id != userBook.Id)
