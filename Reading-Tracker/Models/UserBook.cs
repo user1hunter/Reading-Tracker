@@ -7,7 +7,7 @@
         public int UserId { get; set; }
         public Book Book { get; set; }
         public int BookId { get; set; }
-        public int IsFinished { get; set; }
+        public bool IsFinished { get; set; }
         public string Chapter { get; set; }
         public int LineNumber { get; set; }
     }

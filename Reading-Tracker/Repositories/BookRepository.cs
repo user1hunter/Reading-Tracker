@@ -80,6 +80,42 @@ namespace Reading_Tracker.Repositories
             }
         }
 
+        public UserBook GetUserBookByBookId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                           SELECT Id, IsFinished, Chapter, BookId, UserId, LineNumber
+                             FROM UserBook
+                         WHERE Id = @Id
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    UserBook userBook = null;
+                    if (reader.Read())
+                    {
+                        userBook = new UserBook()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            IsFinished = (bool)reader.GetSqlBoolean(reader.GetOrdinal("IsFinished")),
+                            Chapter = DbUtils.GetString(reader, "Chapter"),
+                            BookId = DbUtils.GetInt(reader, "BookId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            LineNumber = DbUtils.GetInt(reader, "LineNumber"),
+                        };
+                    }
+                    reader.Close();
+
+                    return userBook;
+                }
+            }
+        }
+
         public List<Book> GetBookByUserId(int id)
         {
             using (var conn = Connection)
@@ -187,6 +223,7 @@ namespace Reading_Tracker.Repositories
                     cmd.Parameters.AddWithValue("@isFinished", userBook.IsFinished);
                     cmd.Parameters.AddWithValue("@chapter", userBook.Chapter);
                     cmd.Parameters.AddWithValue("@lineNumber", userBook.LineNumber);
+                    cmd.Parameters.AddWithValue("@id", userBook.Id);
 
                     cmd.ExecuteNonQuery();
                 }
