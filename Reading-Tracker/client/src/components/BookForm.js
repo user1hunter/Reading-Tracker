@@ -75,6 +75,7 @@ const BookForm = () => {
                 </Select>
             </FormGroup>
             <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
+            <Button onClick={(e) => history.push(`/books`)}>Cancel</Button>
         </Form>
     )
 }

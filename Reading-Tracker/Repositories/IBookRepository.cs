@@ -8,10 +8,11 @@ namespace Reading_Tracker.Repositories
         List<Book> GetAll();
         Book GetById(int id);
         List<Book> GetBookByUserId(int id);
+        List<UserBook> GetUserBookByUserId(int id);
         UserBook GetUserBookByBookId(int id);
         void CreateBook(Book book);
+        void CreateUserBook(int bookId, int userId);
         void UpdateBook(UserBook userBook);
-        //void EditBook(Book book);
         void RemoveBook(int id);
         void CreateBookType(int bookId, int typeId);
     }

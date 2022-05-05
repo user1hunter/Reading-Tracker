@@ -83,7 +83,7 @@ export const getAllBooks = () => {
         body: JSON.stringify(userBook),
       }).then((resp) => {
         if (resp.ok) {
-          return [];
+          return;
         } else if (resp.status === 401) {
           throw new Error("Unauthorized");
         } else {
