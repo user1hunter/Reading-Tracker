@@ -90,7 +90,7 @@ namespace Reading_Tracker.Repositories
                     cmd.CommandText = @"
                            SELECT Id, IsFinished, Chapter, BookId, UserId, LineNumber
                              FROM UserBook
-                         WHERE Id = @Id
+                         WHERE BookId = @Id
                         ";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
@@ -154,6 +154,38 @@ namespace Reading_Tracker.Repositories
             }
         }
 
+        public List<UserBook> GetUserBookByUserId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT 
+                                    ub.UserId AS UserBookUserId, 
+                                    ub.BookId AS UserBookBookId,
+                                    ub.id AS UserBookId
+                            FROM UserBook ub
+                           WHERE ub.UserId = @userId";
+
+                    cmd.Parameters.AddWithValue("@userId", id);
+                    var reader = cmd.ExecuteReader();
+
+                    var userBook = new List<UserBook>();
+
+                    while (reader.Read())
+                    {
+                        userBook.Add(NewUserBookFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return userBook;
+                }
+            }
+        }
+
         public void CreateBook(Book book)
         {
             using (var conn = Connection)
@@ -191,6 +223,28 @@ namespace Reading_Tracker.Repositories
             }
         }
 
+        public void CreateUserBook(int bookId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO UserBook (UserId, BookId, IsFinished, Chapter, LineNumber)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@userId, @bookId, @isFinished, @chapter, @lineNumber)
+                                        ";
+                    DbUtils.AddParameter(cmd, "@userId", userId);
+                    DbUtils.AddParameter(cmd, "@bookId", bookId);
+                    DbUtils.AddParameter(cmd, "@isFinished", false);
+                    DbUtils.AddParameter(cmd, "@chapter", 1);
+                    DbUtils.AddParameter(cmd, "@lineNumber", 1);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void RemoveBook(int id)
         {
             using (SqlConnection conn = Connection)
@@ -199,7 +253,7 @@ namespace Reading_Tracker.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"DELETE FROM UserBook
-                                        WHERE Id = @id";
+                                        WHERE BookId = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
@@ -230,28 +284,6 @@ namespace Reading_Tracker.Repositories
             }
         }
 
-        //public void EditBook(Book book)
-        //{
-        //    using (SqlConnection con = Connection)
-        //    {
-        //        con.Open();
-        //        using (SqlCommand cmd = con.CreateCommand())
-        //        {
-        //            cmd.CommandText += @"UPDATE Book
-        //                                SET
-        //                                    Name = @name,
-        //                                    Author = @author,
-        //                                    TypeId = @typeId
-        //                                WHERE Id = @id";
-        //            cmd.Parameters.AddWithValue("@name", book.Name);
-        //            cmd.Parameters.AddWithValue("@author", book.Author);
-        //            cmd.Parameters.AddWithValue("@typeId", book.BookType.TypeId);
-
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
-
         private Book NewBookFromReader(SqlDataReader reader)
         {
             var book = new Book()
@@ -271,6 +303,18 @@ namespace Reading_Tracker.Repositories
             };
 
             return book;
+        }
+
+        private UserBook NewUserBookFromReader(SqlDataReader reader)
+        {
+            var userBook = new UserBook()
+            {
+                Id = DbUtils.GetInt(reader, "UserBookId"),
+                UserId = DbUtils.GetInt(reader, "UserBookUserId"),
+                BookId = DbUtils.GetInt(reader, "UserBookBookId"),
+            };
+
+            return userBook;
         }
     }
 }

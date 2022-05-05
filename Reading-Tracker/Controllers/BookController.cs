@@ -70,18 +70,6 @@ namespace Reading_Tracker.Controllers
             return NoContent();
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, Book book)
-        //{
-        //    if (id != book.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _bookRepository.EditBook(book);
-        //    return NoContent();
-        //}
-
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

@@ -38,9 +38,9 @@ const UserBookRemove = () => {
     <div>
     <h2 key={userBook.id}>Are you sure you would like to remove"{userBook.name}" from your Reading List? </h2>
     <Button disabled={!userBook.name} className="btn btn-primary" onClick={handleDelete}>
-      Remove From My List
+      Remove
     </Button>
-    <Button onClick={(e) => history.push(`/`)}>Leave On My List</Button>
+    <Button onClick={(e) => history.push(`/`)}>Cancel</Button>
   </div>
   );
 };
