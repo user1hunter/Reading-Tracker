@@ -6,10 +6,9 @@ import { Link } from "react-router-dom";
 import { getAllBooks} from "../modules/bookManager.js";
 import { getUserBookByUserId } from "../modules/userBookManager.js";
 import { addUserBook } from "../modules/userBookManager.js";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import "./BookList.css";
 
 const BookList = () => {
-  const history = useHistory();
   const [books, setBooks] = useState([]);
   const [userBooks, setUserBooks] = useState([]);
 
@@ -34,14 +33,14 @@ const BookList = () => {
   }, []);
 
   return (
-    <div>
-      <Link to="/create">Add New Book</Link>
+    <div style={{backgroundColor: "#0D1321"}}>
+      <Link to="/create" style={{color: "#F0EBD8"}}>Add New Book</Link>
         
-      <CardColumns>
+      <CardColumns style={{backgroundColor: "#0D1321"}, {color: "#F0EBD8"}}>
         {books.length === 0
-          ? `There are no Books in Your List`
+          ? `There are no Books in the Database. Please add some.`
           : books.map((book) => (
-            <ListGroupItem key={`book--${book.id}`}>
+            <ListGroupItem key={`book--${book.id}`} style={{backgroundColor: "#0D1321"}}>
               <Book book={book} key={book.id} />
               {userBooks.find((ub) => book.id === ub.bookId)
               ? null

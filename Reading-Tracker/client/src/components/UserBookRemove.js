@@ -36,7 +36,7 @@ const UserBookRemove = () => {
 
   return (  
     <div>
-    <h2 key={userBook.id}>Are you sure you would like to remove"{userBook.name}" from your Reading List? </h2>
+    <h2 key={userBook.id} style={{color: "#F0EBD8"}}>Are you sure you would like to remove "{userBook.name}" from your Reading List?</h2>
     <Button disabled={!userBook.name} className="btn btn-primary" onClick={handleDelete}>
       Remove
     </Button>

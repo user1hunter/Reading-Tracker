@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import { logout } from "../modules/authManager";
+import "./Header.css";
 
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -9,8 +10,8 @@ export default function Header({ isLoggedIn }) {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">
+            <Navbar className="color-nav" light expand="md">
+                <NavbarBrand style={{fontWeight: "bold"}, {color: "#F0EBD8"}} tag={RRNavLink} to="/">
                     Reading Tracker
                 </NavbarBrand>
                 <NavbarToggler onClick={toggle} />
@@ -20,7 +21,7 @@ export default function Header({ isLoggedIn }) {
                         {isLoggedIn && (
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/">
+                                    <NavLink style={{color: "#F0EBD8"}} tag={RRNavLink} to="/">
                                         Home
                                     </NavLink>
                                 </NavItem>
@@ -34,7 +35,8 @@ export default function Header({ isLoggedIn }) {
                                     <a
                                         aria-current="page"
                                         className="nav-link"
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: "pointer" },
+                                                {color: "#F0EBD8"}}
                                         onClick={logout}
                                     >
                                         Logout

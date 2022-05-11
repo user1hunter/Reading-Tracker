@@ -4,7 +4,7 @@ import { createBook } from "../modules/bookManager.js";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { getAllTypes } from "../modules/typeManager";
 import Select from "react-select";
-import BookList from "./BookList.js";
+import "./BookForm.css";
 
 const BookForm = () => {
     const history = useHistory();
@@ -61,17 +61,36 @@ const BookForm = () => {
     return (
         <Form>
             <FormGroup>
-                <Label for="title">Book Name:</Label>
-                <Input type="text" name="name" id="name" placeholder="Book Name" value={book.name} onChange={handleInputChange}/>
+                <Label for="title" style={{color: "#F0EBD8"}}>Book Name:</Label>
+                <Input type="text" 
+                name="name" 
+                id="name" 
+                placeholder="Book Name" 
+                style={{backgroundColor: "#748CAB"}}
+                value={book.name} 
+                onChange={handleInputChange}/>
             </FormGroup>
             <FormGroup>
-                <Label for="title">Author Name:</Label>
-                <Input type="text" name="author" id="author" placeholder="Author Name" value={book.author} onChange={handleInputChange}/>
+                <Label for="title" style={{color: "#F0EBD8"}}>Author Name:</Label>
+                <Input type="text" 
+                name="author" 
+                id="author" 
+                placeholder="Author Name" 
+                style={{backgroundColor: "#748CAB"}}
+                value={book.author} 
+                onChange={handleInputChange}/>
             </FormGroup>
             <FormGroup>
-                <Label for="description">Book Type:</Label>
-                <Select isMulti className="basic-multi-select" classNamePrefix="select" name="types" placeholder="Book Type" 
-                defaultValue={[options[0]]} options={options} onChange={handleMultiSelectInputChange}>
+                <Label for="description" style={{color: "#F0EBD8"}}>Book Type:</Label>
+                <Select isMulti 
+                className="basic-multi-select" 
+                classNamePrefix="select" 
+                name="types" 
+                placeholder="Book Type" 
+                style={{backgroundColor: "#748CAB"}}
+                defaultValue={[options[0]]} 
+                options={options} 
+                onChange={handleMultiSelectInputChange}>
                 </Select>
             </FormGroup>
             <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>

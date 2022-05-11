@@ -52,31 +52,34 @@ const UserBookUpdate = () => {
   return (  
     <Form>
       <FormGroup>
-        <Label for="chapter">Chapter</Label>
+        <Label for="chapter" style={{color: "#F0EBD8"}}>Chapter</Label>
         <Input
           type="text"
           name="chapter"
           id="chapter"
+          style={{backgroundColor: "#748CAB"}}
           value={`${userBook.chapter}`}
           onChange={handleInputChange}
         />
       </FormGroup>
       <FormGroup>
-        <Label for="lineNumber">Line Number(Optional)</Label>
+        <Label for="lineNumber" style={{color: "#F0EBD8"}}>Line Number(Optional)</Label>
         <Input
           type="text"
           name="lineNumber"
           id="lineNumber"
+          style={{backgroundColor: "#748CAB"}}
           value={userBook.lineNumber}
           onChange={handleInputChange}
         />
       </FormGroup>
       <FormGroup>
-        <Label for="isFinished">Check if You've Finished the Book</Label>
+        <Label for="isFinished" style={{color: "#F0EBD8"}}>Check if You've Finished the Book</Label>
         <Input
           type="checkbox"
           name="isFinished"
           id="isFinished"
+          style={{backgroundColor: "#748CAB"}}
           checked={userBook.isFinished}
           onChange={handleCheckboxChange}
         />

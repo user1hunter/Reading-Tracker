@@ -1,0 +1,15 @@
+.select__control {
+  background-color: #748cab !important;
+}
+
+.form-control {
+  color: #f0ebd8 !important;
+}
+
+::placeholder {
+  color: #0d1321 !important;
+}
+
+.select__placeholder {
+  color: #0d1321 !important;
+}

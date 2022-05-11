@@ -5,9 +5,11 @@ import { Button } from "reactstrap";
 
 const UserBook = ({userBook}) => {
     return (
-        <Card style={{height:200}} >
-            <CardBody>
-                <CardTitle>{userBook.name}</CardTitle>
+        <Card style={{height:125},
+                    {backgroundColor: "#1D2D44"}} >
+            <CardBody style={{fontWeight: "bold"},
+                            {color: "#F0EBD8"}}>
+                <CardTitle style={{fontWeight: "bold"}}>{userBook.name}</CardTitle>
                 <CardSubtitle>Author: {userBook.author}</CardSubtitle>
                 <CardSubtitle>Chapter: {userBook.userBook.chapter}</CardSubtitle>
                 <CardSubtitle>Line Number: {userBook.userBook.lineNumber}</CardSubtitle>

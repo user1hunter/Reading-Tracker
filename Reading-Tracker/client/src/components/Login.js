@@ -20,18 +20,25 @@ export default function Login() {
     <Form onSubmit={loginSubmit}>
       <fieldset>
         <FormGroup>
-          <Label for="email">Email</Label>
-          <Input id="email" type="text" autoFocus onChange={e => setEmail(e.target.value)} />
+          <Label for="email" style={{color: "#F0EBD8"}}>Email</Label>
+          <Input id="email" 
+          type="text"
+          autoFocus 
+          style={{backgroundColor: "#748CAB"}}
+          onChange={e => setEmail(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <Label for="password" style={{color: "#F0EBD8"}}>Password</Label>
+          <Input id="password" 
+          type="password" 
+          style={{backgroundColor: "#748CAB"}}
+          onChange={e => setPassword(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Button>Login</Button>
         </FormGroup>
-        <em>
-          Not registered? <Link to="register">Register</Link>
+        <em style={{color: "#F0EBD8"}}>
+          Not registered? <Link to="register" style={{color: "#F0EBD8"}}>Register</Link>
         </em>
       </fieldset>
     </Form>

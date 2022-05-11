@@ -26,20 +26,32 @@ export default function Register() {
     <Form onSubmit={registerClick}>
       <fieldset>
         <FormGroup>
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" type="text" onChange={e => setName(e.target.value)} />
+          <Label htmlFor="name" style={{color: "#F0EBD8"}}>Name</Label>
+          <Input id="name" 
+          type="text" 
+          style={{backgroundColor: "#748CAB"}}
+          onChange={e => setName(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label for="email">Email</Label>
-          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+          <Label for="email" style={{color: "#F0EBD8"}}>Email</Label>
+          <Input id="email" 
+          type="text" 
+          style={{backgroundColor: "#748CAB"}}
+          onChange={e => setEmail(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <Label for="password" style={{color: "#F0EBD8"}}>Password</Label>
+          <Input id="password" 
+          type="password" 
+          style={{backgroundColor: "#748CAB"}}
+          onChange={e => setPassword(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
+          <Label for="confirmPassword" style={{color: "#F0EBD8"}}>Confirm Password</Label>
+          <Input id="confirmPassword" 
+          type="password" 
+          style={{backgroundColor: "#748CAB"}}
+          onChange={e => setConfirmPassword(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Button>Register</Button>
