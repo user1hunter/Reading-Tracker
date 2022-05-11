@@ -5,13 +5,13 @@
 Reading-Tracker is a web-app that lets a user create a list of books they are reading and keep up with where they last left off. A lot like a Virtual Bookmark!
 
 # ERD
-The outline for how all my data would interact with each other
+The Outline for how all my Data would interact with each other.
 
 ![ERD](/Reading-Tracker/client/public/Reading--Tracker.png)
 
 
 # WireFrame
-The Outline for what I thought the app might look like at the beginning
+The Outline for what I thought the app might look like at the beginning.
 
 ![WireFrame](https://github.com/user1hunter/Reading-Tracker/blob/main/Reading-Tracker/client/public/Back-End%20WireFrame.jpg)
 
