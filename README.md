@@ -11,7 +11,7 @@ Reading-Tracker is a web-app that lets a user create a list of books they are re
 
 # WireFrame
 
-![WireFrame](/Reading-Tracker/client/public/Back-End WireFrame.png)
+![WireFrame](https://github.com/user1hunter/Reading-Tracker/blob/main/Reading-Tracker/client/public/Back-End%20WireFrame.jpg)
 )
 
 # Setting Up This Project:
